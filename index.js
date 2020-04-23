@@ -216,13 +216,12 @@ Emailer.send = function (data, callback) {
 					if (data._raw.notification && data._raw.notification.pid && settings.inbound_enabled === 'on') {
 						replyTo = 'reply-' + data._raw.notification.pid + '@' + Emailer.hostname;
 					}
-
+					data.from = data.from_name + '<' + data.from + '>';
 					SendGrid.send({
 						to: data.to,
 						toname: data.toName,
 						subject: data.subject,
 						from: data.from,
-						fromname: data.from_name || userData.username || undefined,
 						text: data.text,
 						html: data.html,
 						headers: data.headers,
